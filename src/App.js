@@ -1,7 +1,7 @@
 import "./App.css";
 import FormComponent from "./components/Form";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Table from "./components/Table";
+import TableData from "./components/Table";
 import { Redirect } from "react-router-dom";
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
           <Route exact path="/">
             <FormComponent />
           </Route>
-          <Route exact path="/usertable">
-            <Table />
+          <Route exact path="/list">
+            <TableData />
           </Route>
           <Redirect to="/" />
         </Switch>

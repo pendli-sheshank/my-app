@@ -3,27 +3,30 @@ import React, { useEffect, useState } from "react";
 const Table = () => {
   const [data, setData] = useState();
 
+  useEffect(() => {
+    let getData = JSON.parse(localStorage.getItem("data"));
+    console.log("getData--->", getData);
+    setData(getData);
+  }, []);
+
   return (
-    <div>
-      {data?.data.map((val, index) => {
-        <table>
-          <tr>
-            <th>Company</th>
-            <th>Contact</th>
-            <th>Country</th>
-          </tr>
-          <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-          </tr>
-          <tr>
-            <td>Centro comercial Moctezuma</td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
-          </tr>
-        </table>;
-      })}
+    <div className="App">
+      {data &&
+        data.map((val, index) => {
+          return (
+            <>
+              <table className="table-row">
+                <th>Name</th>
+                <th>Email</th>
+                <tr>
+                  <td>{val.firstNameValue}</td>
+                  <td>{val.emailValue}</td>
+                </tr>
+              </table>
+            </>
+          );
+        })}
+      ;
     </div>
   );
 };

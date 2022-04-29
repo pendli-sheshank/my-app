@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
+import Table from "./Table";
 
 const Forms = () => {
   const [firstNameValue, setfirstNameValue] = useState("");
@@ -50,7 +51,7 @@ const Forms = () => {
       setLastNameValue("");
       setNumberValue("");
       setEmailValue("");
-      window.location.href = "/usertable";
+      window.location.href = "/list";
     } else return;
   };
 
