@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import Table from "./Table";
+import { v4 as uuidv4 } from 'uuid';
 
 const Forms = () => {
   const [firstNameValue, setfirstNameValue] = useState("");
@@ -25,9 +25,11 @@ const Forms = () => {
   };
 
   const formSubmit = (e) => {
+
     e.preventDefault();
 
     let formData = {
+      id:uuidv4(),
       firstNameValue,
       lastNameValue,
       numberValue,
@@ -51,7 +53,7 @@ const Forms = () => {
       setLastNameValue("");
       setNumberValue("");
       setEmailValue("");
-      window.location.href = "/list";
+       window.location.href="/list";
     } else return;
   };
 
