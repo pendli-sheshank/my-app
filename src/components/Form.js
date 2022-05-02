@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Forms = () => {
   const [firstNameValue, setfirstNameValue] = useState("");
   const [lastNameValue, setLastNameValue] = useState("");
   const [numberValue, setNumberValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
+  const path = useLocation();
+  const id = useParams();
 
   const [submittedForm, setSubmitedForm] = useState([]);
   const handleChange = (e) => {
@@ -25,11 +29,10 @@ const Forms = () => {
   };
 
   const formSubmit = (e) => {
-
     e.preventDefault();
 
     let formData = {
-      id:uuidv4(),
+      id: uuidv4(),
       firstNameValue,
       lastNameValue,
       numberValue,
@@ -53,11 +56,15 @@ const Forms = () => {
       setLastNameValue("");
       setNumberValue("");
       setEmailValue("");
-       window.location.href="/list";
+      window.location.href = "/list";
     } else return;
   };
 
   useEffect(() => {
+    console.log("path===>", path);
+    console.log("params===>", id.id);
+    let getData = JSON.parse(localStorage.getItem("data"));
+
     console.log(submittedForm);
   }, [submittedForm]);
 
@@ -65,7 +72,12 @@ const Forms = () => {
     <div className="container mt-5 p-5">
       <form onSubmit={formSubmit}>
         <div className="card p-5">
-          <h1 className="card-title text-center">Registration Form</h1>
+          {path?.pathname == "/edit/" + id.id ? (
+            <h1 className="card-title text-center">Edit Registration Form</h1>
+          ) : (
+            <h1 className="card-title text-center">Registration Form</h1>
+          )}
+
           <div className="d-flex flex-column pt-0 p-5">
             <div className="form-group d-flex flex-column">
               <label className="col-form-label" htmlFor="idForFirstName">
@@ -98,7 +110,9 @@ const Forms = () => {
               <input
                 className="form-control"
                 id="idForNumber"
-                type="text"
+                type="tel"
+                maxLength="10"
+                minLength="10"
                 value={numberValue}
                 onChange={handleChange}
               />
@@ -115,9 +129,15 @@ const Forms = () => {
                 onChange={handleChange}
               />
             </div>
-            <button className="btn btn-primary mt-3" type="submit">
-              Register
-            </button>
+            {path?.pathname == "/edit/" + id.id ? (
+              <button className="btn btn-primary mt-3" type="submit">
+                Update
+              </button>
+            ) : (
+              <button className="btn btn-primary mt-3" type="submit">
+                Register
+              </button>
+            )}
           </div>
         </div>
       </form>

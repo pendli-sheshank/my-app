@@ -5,12 +5,14 @@ import TableData from "./components/Table";
 import { Redirect } from "react-router-dom";
 
 function App() {
-  
   return (
     <Router>
       <div className="App">
         <Switch>
           <Route exact path="/">
+            <FormComponent />
+          </Route>
+          <Route exact path="/edit/:id">
             <FormComponent />
           </Route>
           <Route exact path="/list">
