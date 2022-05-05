@@ -65,6 +65,37 @@ const Forms = () => {
     console.log("params===>", id.id);
     let getData = JSON.parse(localStorage.getItem("data"));
 
+    setfirstNameValue(
+      getData.map((val, index) => {
+        if (index == id.id) {
+          return val.firstNameValue;
+        }
+      })
+    );
+    setLastNameValue(
+      getData.map((val, index) => {
+        if (index == id.id) {
+          return val.lastNameValue;
+        }
+      })
+    );
+    setNumberValue(
+      getData.map((val, index) => {
+        if (index == id.id) {
+          return val.numberValue;
+        }
+      })
+    );
+    setEmailValue(
+      getData.map((val, index) => {
+        if (index == id.id) {
+          return val.emailValue;
+        }
+      })
+    );
+
+    console.log(getData);
+
     console.log(submittedForm);
   }, [submittedForm]);
 
@@ -130,7 +161,11 @@ const Forms = () => {
               />
             </div>
             {path?.pathname == "/edit/" + id.id ? (
-              <button className="btn btn-primary mt-3" type="submit">
+              <button
+                //onClick={updateForm}
+                className="btn btn-primary mt-3"
+                type="button"
+              >
                 Update
               </button>
             ) : (
